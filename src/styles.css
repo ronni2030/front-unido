@@ -1,0 +1,614 @@
+/* ========================================
+   ESTILOS GLOBALES - OPENBLIND CLIENT
+   ======================================== */
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables de colores - Paleta Morada Accesible */
+:root {
+  /* Colores principales */
+  --primary: #4B1F6F;
+  --secondary: #7A3EB1;
+  --accent: #B983FF;
+  --background: #F6F1FB;
+  --text-main: #1B1026;
+  --text-secondary: #5F5A68;
+  --error: #8B1E3F;
+  --success: #1F7A6F;
+  
+  /* Tamaños de fuente */
+  --font-size-base: 20px;
+  --font-size-title: 28px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 22px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 40px;
+  
+  /* Border radius */
+  --radius: 25px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 25px;
+  --radius-full: 9999px;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-primary: 0 10px 30px rgba(75, 31, 111, 0.25);
+  --shadow-secondary: 0 10px 30px rgba(122, 62, 177, 0.25);
+  --shadow-accent: 0 10px 30px rgba(185, 131, 255, 0.25);
+  
+  /* Espaciado */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 40px;
+}
+
+/* Estilos del body */
+body {
+  background-color: #1B1026;
+  color: white;
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Contenedor principal */
+#root {
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #1B1026;
+  min-height: 100vh;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   FONDOS Y EFECTOS
+   ======================================== */
+
+.bg-app-dark {
+  background-color: #1B1026;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-app-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #7A3EB1 0%, transparent 70%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ========================================
+   LIQUID DRIP HEADER DESIGN
+   ======================================== */
+
+.drip-header {
+  position: relative;
+  background: var(--primary);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  /* Efecto de gotas líquidas */
+  clip-path: polygon(
+    100% 0, 100% 85%, 91% 87%, 83% 94%, 75% 88%, 
+    65% 87%, 57% 93%, 49% 88%, 41% 87%, 33% 94%, 
+    25% 88%, 15% 87%, 8% 94%, 0 87%, 0 0
+  );
+}
+
+.drip-header::after {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: inherit;
+  border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+  display: none;
+}
+
+.drip-header h1 {
+  color: white;
+  font-size: 32px;
+  margin: 0;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+/* ========================================
+   BOTONES MODERNOS - GRANDES Y COLOREADOS
+   ======================================== */
+
+.big-button {
+  background-color: white;
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 700;
+  padding: 24px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.big-button:active {
+  transform: scale(0.96);
+}
+
+.big-button.primary {
+  background: linear-gradient(135deg, var(--primary), #5B278A);
+  color: white;
+  box-shadow: var(--shadow-primary);
+}
+
+.big-button.secondary {
+  background: linear-gradient(135deg, var(--secondary), #8E54CC);
+  color: white;
+  box-shadow: var(--shadow-secondary);
+}
+
+.big-button.accent {
+  background: linear-gradient(135deg, var(--accent), #D1A3FF);
+  color: white;
+  box-shadow: var(--shadow-accent);
+}
+
+.big-button i,
+.big-button span:first-child {
+  font-size: 40px;
+  margin-bottom: 4px;
+}
+
+/* ========================================
+   INPUTS GRANDES
+   ======================================== */
+
+.big-input {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 18px;
+  border-radius: 18px;
+  border: 2px solid #E5E0F5;
+  background-color: white;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  transition: border-color 0.2s;
+}
+
+.big-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.big-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* ========================================
+   DASHBOARD Y CONTENEDORES
+   ======================================== */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px 40px;
+  width: 100%;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+/* ========================================
+   TARJETAS DE INFORMACIÓN (GLASSMORPHISM)
+   ======================================== */
+
+.info-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.info-card h2 {
+  font-size: var(--font-size-title);
+  margin-bottom: 12px;
+  color: white;
+}
+
+.info-card p {
+  font-size: var(--font-size-md);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* ========================================
+   UTILIDADES DE TEXTO
+   ======================================== */
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-light {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-semibold {
+  font-weight: 600;
+}
+
+/* ========================================
+   UTILIDADES DE GRADIENTES
+   ======================================== */
+
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, #5B278A 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, var(--secondary) 0%, #8E54CC 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, #D1A3FF 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================================
+   CONTENEDORES
+   ======================================== */
+
+.container {
+  padding: var(--spacing-xl);
+  max-width: 100%;
+}
+
+.container-sm {
+  padding: var(--spacing-md);
+}
+
+.container-lg {
+  padding: var(--spacing-3xl);
+}
+
+/* ========================================
+   PÁGINA 404
+   ======================================== */
+
+.not-found-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+  padding: var(--spacing-xl);
+}
+
+.not-found-content {
+  text-align: center;
+}
+
+.not-found-title {
+  font-size: 96px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1;
+}
+
+.not-found-message {
+  font-size: var(--font-size-xl);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-3xl);
+}
+
+/* ========================================
+   UTILIDADES DE LAYOUT
+   ======================================== */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ========================================
+   UTILIDADES RESPONSIVAS
+   ======================================== */
+
+@media (min-width: 768px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  #root {
+    max-width: 480px;
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: var(--spacing-md);
+  }
+  
+  .dashboard-container {
+    padding: 0 var(--spacing-md) var(--spacing-3xl);
+  }
+  
+  .not-found-title {
+    font-size: 64px;
+  }
+  
+  .big-button {
+    font-size: 18px;
+    padding: 20px;
+  }
+}
+
+/* ========================================
+   SCROLLBAR PERSONALIZADO
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ========================================
+   ESTADOS DE CARGA
+   ======================================== */
+
+.loading-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+   UTILIDADES DE SOMBRAS
+   ======================================== */
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-primary {
+  box-shadow: var(--shadow-primary);
+}
+
+.shadow-secondary {
+  box-shadow: var(--shadow-secondary);
+}
+
+.shadow-accent {
+  box-shadow: var(--shadow-accent);
+}
+
+/* ========================================
+   BOTONES ADICIONALES
+   ======================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--font-size-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #5B278A);
+  color: white;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--secondary), #8E54CC);
+  color: white;
+  box-shadow: var(--shadow-secondary);
+}
+
+.btn-secondary:active {
+  transform: scale(0.96);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-white {
+  background-color: white;
+  color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-white:active {
+  transform: scale(0.96);
+}
