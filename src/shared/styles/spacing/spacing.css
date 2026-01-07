@@ -1,0 +1,19 @@
+.screen {
+  min-height: 100vh;
+  padding: 20px;
+  padding-bottom: 90px;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.actions-row,
+.card-actions,
+.tracking-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+}

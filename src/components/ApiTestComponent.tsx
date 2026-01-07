@@ -21,7 +21,7 @@ export function ApiTestComponent() {
 
     // Test 1: Verificar configuración del cliente
     addResult('Test 1: Cliente API configurado correctamente');
-    addResult('  - Base URL: ' + (import.meta.env.VITE_API_URL || 'http://localhost:8888'));
+    addResult('  - Base URL: http://localhost:8888');
 
     // Test 2: Verificar que los servicios existen
     try {

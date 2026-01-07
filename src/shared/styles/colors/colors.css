@@ -1,0 +1,19 @@
+:root {
+  /* 🎨 Paleta morada accesible */
+  --color-primary: #4B1F6F;
+  --color-secondary: #7A3EB1;
+  --color-accent: #B983FF;
+
+  --color-bg-main: #120022;
+  --color-bg-card: #2a1a3a;
+  --color-bg-dark: #1f1b33;
+
+  --color-text-main: #ffffff;
+  --color-text-secondary: #c4b5fd;
+
+  --color-success: #1f7a6f;
+  --color-danger: #dc2626;
+
+  --color-header-start: #b32be0;
+  --color-header-end: #8b5cf6;
+}

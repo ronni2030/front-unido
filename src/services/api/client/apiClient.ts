@@ -1,79 +1,92 @@
-import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios';
+// Servicio API para operaciones de usuarios (usado en perfil)
+export class UsersApiService {
+  private static readonly BASE_URL = 'http://localhost:8888';
 
-// Configuración base de la API
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8888';
+  static async saveUser(userData: { name: string; email: string; phone: string }) {
+    console.log('Intentando guardar:', userData);
+    try {
+      const response = await fetch(`${this.BASE_URL}/usuarios/crear`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nameUsers: userData.name,
+          emailUser: userData.email,
+          userName: userData.name,
+          passwordUser: 'OpenBlind123',
+          phoneUser: userData.phone
+        }),
+      });
 
-// Crear instancia de axios
-const api: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 30000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  withCredentials: true, // Importante para manejar cookies/sesiones si el backend lo requiere
-});
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
 
-// Interceptor de solicitudes - añadir token de autenticación y logs
-api.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    // Añadir token de autenticación si existe
-    const token = localStorage.getItem('authToken');
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    
-    // Puedes agregar logs de depuración aquí si es necesario
-    // console.log('Request:', config.method?.toUpperCase(), config.url);
-    
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Interceptor de respuestas - manejo de errores y logs
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    // Log de errores
-    console.error('API Error:', error.response?.data?.message || error.message);
-    
-    const originalRequest = error.config;
-
-    // Si el token ha expirado (401) y no se ha reintentado aún
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      // Intentar refrescar el token si existe
-      const refreshToken = localStorage.getItem('refreshToken');
-      
-      if (refreshToken) {
-        try {
-          // Aquí podrías llamar a un endpoint de refresh token si lo tienes
-          // const response = await axios.post(`${API_BASE_URL}/auth/refresh`, { refreshToken });
-          // const newToken = response.data.token;
-          // localStorage.setItem('authToken', newToken);
-          // originalRequest.headers.Authorization = `Bearer ${newToken}`;
-          // return api(originalRequest);
-        } catch (refreshError) {
-          // Si falla el refresh, limpiar tokens y redirigir al login
-          localStorage.removeItem('authToken');
-          localStorage.removeItem('refreshToken');
-          window.location.href = '/login';
-          return Promise.reject(refreshError);
-        }
-      } else {
-        // No hay refresh token, limpiar y redirigir
-        localStorage.removeItem('authToken');
-        window.location.href = '/login';
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Error response:', errorText);
+        throw new Error(`Error ${response.status}: ${errorText}`);
       }
+
+      const result = await response.json();
+      console.log('Usuario guardado exitosamente:', result);
+      return result;
+    } catch (error) {
+      console.error('Error completo:', error);
+      throw error;
     }
-
-    return Promise.reject(error);
   }
-);
 
-export default api;
+  static async getUser(id: string) {
+    try {
+      const response = await fetch(`${this.BASE_URL}/usuarios/obtener/${id}`);
+      
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error al obtener usuario:', error);
+      throw error;
+    }
+  }
+
+  static async updateUser(id: string, userData: Partial<{ name: string; email: string; phone: string }>) {
+    try {
+      const response = await fetch(`${this.BASE_URL}/usuarios/actualizar/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error al actualizar usuario:', error);
+      throw error;
+    }
+  }
+
+  static async deleteUser(id: string) {
+    try {
+      const response = await fetch(`${this.BASE_URL}/usuarios/eliminar/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error al eliminar usuario:', error);
+      throw error;
+    }
+  }
+}

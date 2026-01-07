@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  font-family: system-ui;
+  background: var(--color-bg-main);
+  color: var(--color-text-main);
+}
+
+h1 {
+  font-size: 28px;
+}
+
+.app-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.app-subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.tracking-address {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.tracking-date {
+  font-size: 12px;
+  opacity: 0.7;
+}

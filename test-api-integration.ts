@@ -3,14 +3,6 @@
  * Ejecutar con: npx tsx test-api-integration.ts
  */
 
-// Simulación de import.meta.env para Node.js
-(globalThis as any).import = {
-  meta: {
-    env: {
-      VITE_API_URL: 'http://localhost:8888'
-    }
-  }
-};
 
 async function runTests() {
   // Test 1: Verificar que los tipos se importan correctamente

@@ -1,0 +1,94 @@
+/* ===== HEADER ===== */
+.openblind-header,
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(
+    90deg,
+    var(--color-header-start),
+    var(--color-header-end)
+  );
+  padding: 16px;
+  text-align: center;
+  border-radius: 0 0 22px 22px;
+  color: white;
+}
+
+/* ===== CARDS ===== */
+.route-card,
+.tracking-card {
+  background: var(--color-bg-card);
+  padding: 16px;
+  border-radius: 18px;
+  margin-top: 16px;
+}
+
+/* ===== BOTONES ===== */
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  border-radius: 16px;
+  background: var(--color-secondary);
+  color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.btn-wide {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary,
+.btn-edit {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn-delete {
+  background: var(--color-danger);
+  color: white;
+}
+
+/* ===== NAVBAR ===== */
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 72px;
+  background: #1f1a2e;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 2px solid #333;
+}
+
+.nav-item {
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.nav-item svg {
+  font-size: 22px;
+}
+
+.nav-item.active {
+  color: var(--color-accent);
+}
+.screen {
+  background: var(--color-bg-main);
+  color: white;
+}
