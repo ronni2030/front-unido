@@ -4,21 +4,27 @@ import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axio
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8888';
 
 // Crear instancia de axios
-const apiClient: AxiosInstance = axios.create({
+const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, // Importante para manejar cookies/sesiones si el backend lo requiere
 });
 
-// Interceptor de solicitudes - añadir token de autenticación
-apiClient.interceptors.request.use(
+// Interceptor de solicitudes - añadir token de autenticación y logs
+api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    // Añadir token de autenticación si existe
     const token = localStorage.getItem('authToken');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    // Puedes agregar logs de depuración aquí si es necesario
+    // console.log('Request:', config.method?.toUpperCase(), config.url);
+    
     return config;
   },
   (error) => {
@@ -26,12 +32,15 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Interceptor de respuestas - manejo de errores
-apiClient.interceptors.response.use(
+// Interceptor de respuestas - manejo de errores y logs
+api.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
+    // Log de errores
+    console.error('API Error:', error.response?.data?.message || error.message);
+    
     const originalRequest = error.config;
 
     // Si el token ha expirado (401) y no se ha reintentado aún
@@ -48,7 +57,7 @@ apiClient.interceptors.response.use(
           // const newToken = response.data.token;
           // localStorage.setItem('authToken', newToken);
           // originalRequest.headers.Authorization = `Bearer ${newToken}`;
-          // return apiClient(originalRequest);
+          // return api(originalRequest);
         } catch (refreshError) {
           // Si falla el refresh, limpiar tokens y redirigir al login
           localStorage.removeItem('authToken');
@@ -67,4 +76,4 @@ apiClient.interceptors.response.use(
   }
 );
 
-export default apiClient;
+export default api;

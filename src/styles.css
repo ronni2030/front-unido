@@ -2,7 +2,7 @@
    ESTILOS GLOBALES - OPENBLIND CLIENT
    ======================================== */
 
-/* Reset básico */
+/* Reset y configuración global */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,15 @@
 
 /* Variables de colores - Paleta Morada Accesible */
 :root {
-  /* Colores principales */
+  /* Paleta actualizada */
+  --bg-dark: #0f0a1e;
+  --header-purple: #421c63;
+  --card-bg: #1a122d;
+  --accent-purple: #5e2a8e;
+  --text-white: #ffffff;
+  --text-muted: #bda6d5;
+  
+  /* Paleta extendida del segundo CSS */
   --primary: #4B1F6F;
   --secondary: #7A3EB1;
   --accent: #B983FF;
@@ -22,8 +30,6 @@
   --success: #1F7A6F;
   
   /* Tamaños de fuente */
-  --font-size-base: 20px;
-  --font-size-title: 28px;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
@@ -47,57 +53,48 @@
   --shadow-primary: 0 10px 30px rgba(75, 31, 111, 0.25);
   --shadow-secondary: 0 10px 30px rgba(122, 62, 177, 0.25);
   --shadow-accent: 0 10px 30px rgba(185, 131, 255, 0.25);
-  
-  /* Espaciado */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 20px;
-  --spacing-2xl: 24px;
-  --spacing-3xl: 40px;
 }
 
 /* Estilos del body */
 body {
-  background-color: #1B1026;
-  color: white;
-  font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #000;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-md);
   line-height: 1.5;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-}
-
-/* Contenedor principal */
-#root {
-  max-width: 480px;
-  margin: 0 auto;
-  background-color: #1B1026;
-  min-height: 100vh;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
 }
 
 /* ========================================
-   FONDOS Y EFECTOS
+   CONTENEDOR PRINCIPAL MOBILE
    ======================================== */
 
-.bg-app-dark {
-  background-color: #1B1026;
+.mobile-shell {
+  width: 360px;
+  height: 720px;
+  background: var(--bg-dark);
+  border-radius: 50px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.bg-app-dark::before {
+/* Fondo con efecto gradiente */
+.mobile-shell::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, #7A3EB1 0%, transparent 70%);
+  background: radial-gradient(circle at center, var(--secondary) 0%, transparent 70%);
   opacity: 0.3;
   pointer-events: none;
+  z-index: 0;
 }
 
 /* ========================================
@@ -105,49 +102,128 @@ body {
    ======================================== */
 
 .drip-header {
-  position: relative;
-  background: var(--primary);
-  height: 200px;
+  background: var(--header-purple);
+  height: 140px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  /* Efecto de gotas líquidas */
-  clip-path: polygon(
-    100% 0, 100% 85%, 91% 87%, 83% 94%, 75% 88%, 
-    65% 87%, 57% 93%, 49% 88%, 41% 87%, 33% 94%, 
-    25% 88%, 15% 87%, 8% 94%, 0 87%, 0 0
-  );
-}
-
-.drip-header::after {
-  content: "";
-  position: absolute;
-  bottom: -25px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background: inherit;
-  border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
-  display: none;
+  align-items: center;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 92%, 70% 85%, 50% 92%, 30% 85%, 15% 92%, 0 85%);
+  z-index: 1;
 }
 
 .drip-header h1 {
-  color: white;
-  font-size: 32px;
-  margin: 0;
+  color: var(--text-white);
+  font-size: var(--font-size-2xl);
+  text-transform: uppercase;
+  letter-spacing: 2px;
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 10;
 }
 
 /* ========================================
-   BOTONES MODERNOS - GRANDES Y COLOREADOS
+   ÁREA PRINCIPAL DE CONTENIDO
+   ======================================== */
+
+.app-main {
+  padding: 25px;
+  flex: 1;
+  overflow-y: auto;
+  z-index: 1;
+  position: relative;
+}
+
+/* ========================================
+   TARJETAS DE GLASSMORPHISM
+   ======================================== */
+
+.glass-item {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.2s ease;
+}
+
+.glass-item:active {
+  transform: scale(0.98);
+}
+
+.item-info label {
+  font-size: var(--font-size-xs);
+  font-weight: 900;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.item-info p {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text-white);
+  font-size: var(--font-size-lg);
+}
+
+/* ========================================
+   SEGUNDA VISTA - FILAS DE LOG
+   ======================================== */
+
+.log-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-white);
+  font-size: var(--font-size-md);
+}
+
+.log-row:last-child {
+  border-bottom: none;
+}
+
+/* ========================================
+   BOTONES MODERNOS
+   ======================================== */
+
+.delete-trigger {
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent-purple), var(--secondary));
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 18px;
+  border-radius: var(--radius);
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: var(--font-size-md);
+  box-shadow: var(--shadow-primary);
+}
+
+.delete-trigger:active {
+  transform: scale(0.96);
+}
+
+.btn-reset {
+  background: linear-gradient(135deg, var(--error), #B91E43) !important;
+  box-shadow: 0 10px 30px rgba(139, 30, 63, 0.25) !important;
+}
+
+/* ========================================
+   BOTONES GRANDES
    ======================================== */
 
 .big-button {
   background-color: white;
   color: var(--primary);
-  font-size: 22px;
+  font-size: var(--font-size-xl);
   font-weight: 700;
   padding: 24px;
   border: none;
@@ -162,6 +238,7 @@ body {
   box-shadow: var(--shadow-md);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
+  margin-bottom: 16px;
 }
 
 .big-button:active {
@@ -199,88 +276,72 @@ body {
 .big-input {
   width: 100%;
   padding: 16px 20px;
-  font-size: 18px;
-  border-radius: 18px;
-  border: 2px solid #E5E0F5;
-  background-color: white;
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-md);
+  border: 2px solid rgba(229, 224, 245, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   margin-bottom: 20px;
-  color: var(--text-main);
+  color: var(--text-white);
   transition: border-color 0.2s;
 }
 
 .big-input:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: var(--accent-purple);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .big-input::placeholder {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   opacity: 0.6;
 }
 
 /* ========================================
-   DASHBOARD Y CONTENEDORES
+   DOCK INFERIOR DE NAVEGACIÓN
    ======================================== */
 
-.dashboard-container {
+.bottom-dock {
+  height: 85px;
+  background: #0a0714;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 0 20px 40px;
-  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  position: relative;
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  width: 100%;
+.nav-btn {
+  font-size: 28px;
+  opacity: 0.3;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn.active {
+  opacity: 1;
+  color: var(--text-white);
+  filter: drop-shadow(0 0 8px var(--accent-purple));
+  transform: translateY(-2px);
 }
 
 /* ========================================
-   TARJETAS DE INFORMACIÓN (GLASSMORPHISM)
+   SLIDER DE VOLUMEN
    ======================================== */
 
-.info-card {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: white;
-  padding: 24px;
-  border-radius: var(--radius);
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+.vol-slider {
   width: 100%;
-  overflow: hidden;
-}
-
-.info-card h2 {
-  font-size: var(--font-size-title);
-  margin-bottom: 12px;
-  color: white;
-}
-
-.info-card p {
-  font-size: var(--font-size-md);
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
+  accent-color: var(--accent-purple);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  height: 8px;
+  margin: 20px 0;
 }
 
 /* ========================================
-   UTILIDADES DE TEXTO
+   UTILIDADES
    ======================================== */
-
-.text-primary {
-  color: var(--primary);
-}
-
-.text-secondary {
-  color: var(--text-secondary);
-}
-
-.text-light {
-  color: rgba(255, 255, 255, 0.7);
-}
 
 .text-center {
   text-align: center;
@@ -294,80 +355,9 @@ body {
   font-weight: 600;
 }
 
-/* ========================================
-   UTILIDADES DE GRADIENTES
-   ======================================== */
-
-.gradient-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, #5B278A 100%);
+.text-light {
+  color: rgba(255, 255, 255, 0.7);
 }
-
-.gradient-secondary {
-  background: linear-gradient(135deg, var(--secondary) 0%, #8E54CC 100%);
-}
-
-.gradient-accent {
-  background: linear-gradient(135deg, var(--accent) 0%, #D1A3FF 100%);
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ========================================
-   CONTENEDORES
-   ======================================== */
-
-.container {
-  padding: var(--spacing-xl);
-  max-width: 100%;
-}
-
-.container-sm {
-  padding: var(--spacing-md);
-}
-
-.container-lg {
-  padding: var(--spacing-3xl);
-}
-
-/* ========================================
-   PÁGINA 404
-   ======================================== */
-
-.not-found-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--background);
-  padding: var(--spacing-xl);
-}
-
-.not-found-content {
-  text-align: center;
-}
-
-.not-found-title {
-  font-size: 96px;
-  font-weight: 900;
-  color: var(--primary);
-  margin-bottom: var(--spacing-lg);
-  line-height: 1;
-}
-
-.not-found-message {
-  font-size: var(--font-size-xl);
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-3xl);
-}
-
-/* ========================================
-   UTILIDADES DE LAYOUT
-   ======================================== */
 
 .flex-center {
   display: flex;
@@ -386,20 +376,12 @@ body {
   flex-direction: column;
 }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.gap-sm {
-  gap: var(--spacing-sm);
-}
-
 .gap-md {
-  gap: var(--spacing-md);
+  gap: 15px;
 }
 
 .gap-lg {
-  gap: var(--spacing-lg);
+  gap: 25px;
 }
 
 /* ========================================
@@ -450,165 +432,53 @@ body {
 }
 
 /* ========================================
-   UTILIDADES RESPONSIVAS
-   ======================================== */
-
-@media (min-width: 768px) {
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  
-  #root {
-    max-width: 480px;
-    box-shadow: var(--shadow-xl);
-  }
-}
-
-@media (max-width: 767px) {
-  .container {
-    padding: var(--spacing-md);
-  }
-  
-  .dashboard-container {
-    padding: 0 var(--spacing-md) var(--spacing-3xl);
-  }
-  
-  .not-found-title {
-    font-size: 64px;
-  }
-  
-  .big-button {
-    font-size: 18px;
-    padding: 20px;
-  }
-}
-
-/* ========================================
    SCROLLBAR PERSONALIZADO
    ======================================== */
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-light);
-  border-radius: var(--radius-full);
+  background: var(--accent-purple);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: var(--secondary);
 }
 
 /* ========================================
-   ESTADOS DE CARGA
+   RESPONSIVE
    ======================================== */
 
-.loading-spinner {
-  border: 3px solid rgba(255, 255, 255, 0.1);
-  border-top: 3px solid var(--primary);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* ========================================
-   UTILIDADES DE SOMBRAS
-   ======================================== */
-
-.shadow-sm {
-  box-shadow: var(--shadow-sm);
-}
-
-.shadow-md {
-  box-shadow: var(--shadow-md);
-}
-
-.shadow-lg {
-  box-shadow: var(--shadow-lg);
-}
-
-.shadow-primary {
-  box-shadow: var(--shadow-primary);
-}
-
-.shadow-secondary {
-  box-shadow: var(--shadow-secondary);
-}
-
-.shadow-accent {
-  box-shadow: var(--shadow-accent);
-}
-
-/* ========================================
-   BOTONES ADICIONALES
-   ======================================== */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: var(--font-size-md);
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
-  gap: 8px;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary), #5B278A);
-  color: white;
-  box-shadow: var(--shadow-primary);
-}
-
-.btn-primary:active {
-  transform: scale(0.96);
-}
-
-.btn-secondary {
-  background: linear-gradient(135deg, var(--secondary), #8E54CC);
-  color: white;
-  box-shadow: var(--shadow-secondary);
-}
-
-.btn-secondary:active {
-  transform: scale(0.96);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-}
-
-.btn-outline:hover {
-  background-color: var(--primary);
-  color: white;
-}
-
-.btn-white {
-  background-color: white;
-  color: var(--primary);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-white:active {
-  transform: scale(0.96);
+@media (max-width: 400px) {
+  .mobile-shell {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+  
+  .drip-header {
+    height: 120px;
+  }
+  
+  .drip-header h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .app-main {
+    padding: 20px;
+  }
+  
+  .big-button {
+    font-size: var(--font-size-lg);
+    padding: 20px;
+  }
 }

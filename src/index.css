@@ -1,4 +1,24 @@
+/* src/index.css */
 @import "tailwindcss";
+
+/* Configuración de Tailwind personalizada */
+@theme {
+  --color-primary: #4B1F6F;
+  --color-secondary: #7A3EB1;
+  --color-accent: #B983FF;
+  --color-background: #F6F1FB;
+  --color-text-main: #1B1026;
+  --color-text-secondary: #5F5A68;
+  --color-error: #8B1E3F;
+  --color-success: #1F7A6F;
+  
+  --radius: 25px;
+  --radius-lg: 30px;
+  
+  --font-size-base: 20px;
+  --font-size-title: 28px;
+  --font-size-display: 32px;
+}
 
 * {
   margin: 0;
@@ -6,15 +26,39 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* Paleta Morada Accesible (variables CSS) */
+  --primary: #4B1F6F;
+  --secondary: #7A3EB1;
+  --accent: #B983FF;
+  --background: #F6F1FB;
+  --text-main: #1B1026;
+  --text-secondary: #5F5A68;
+  --error: #8B1E3F;
+  --success: #1F7A6F;
+
+  --font-size-base: 20px;
+  --font-size-title: 28px;
+  --radius: 25px;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1B1026;
+  color: white;
   overflow: hidden;
   height: 100vh;
+  min-height: 100vh;
 }
 
 #root {
@@ -28,6 +72,206 @@ body {
 @media (min-width: 768px) {
   #root {
     max-width: 480px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.15);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
   }
+}
+
+/* Fondo con efecto de aplicación móvil */
+.bg-app-dark {
+  background-color: #1B1026;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.bg-app-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #7A3EB1 0%, transparent 70%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Liquid Drip Header Design */
+.drip-header {
+  position: relative;
+  background: var(--primary);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  clip-path: polygon(
+    100% 0, 
+    100% 85%, 
+    91% 87%, 83% 94%, 75% 88%, 65% 87%, 
+    57% 93%, 49% 88%, 41% 87%, 33% 94%, 
+    25% 88%, 15% 87%, 8% 94%, 0 87%, 
+    0 0
+  );
+}
+
+.drip-header h1 {
+  color: white;
+  font-size: 32px;
+  margin: 0;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+/* Botón Moderno - Coloreados */
+.big-button {
+  background-color: white;
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 700;
+  padding: 24px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.big-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.big-button:active {
+  transform: scale(0.96);
+}
+
+.big-button.primary {
+  background: linear-gradient(135deg, var(--primary), #5B278A);
+  color: white;
+  box-shadow: 0 10px 30px rgba(75, 31, 111, 0.25);
+}
+
+.big-button.secondary {
+  background: linear-gradient(135deg, var(--secondary), #8E54CC);
+  color: white;
+  box-shadow: 0 10px 30px rgba(122, 62, 177, 0.25);
+}
+
+.big-button.accent {
+  background: linear-gradient(135deg, var(--accent), #D1A3FF);
+  color: white;
+  box-shadow: 0 10px 30px rgba(185, 131, 255, 0.25);
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px 40px;
+  width: 100%;
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.big-button i,
+.big-button span:first-child {
+  font-size: 40px;
+  margin-bottom: 4px;
+}
+
+/* Tarjeta de información */
+.info-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Inputs grandes */
+.big-input {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 18px;
+  border-radius: 18px;
+  border: 2px solid #E5E0F5;
+  background-color: white;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  transition: border-color 0.2s;
+}
+
+.big-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(75, 31, 111, 0.1);
+}
+
+/* Utilidades de Tailwind personalizadas */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Responsive para móviles pequeños */
+@media (max-width: 360px) {
+  .drip-header {
+    height: 180px;
+  }
+  
+  .big-button {
+    font-size: 20px;
+    padding: 20px;
+  }
+  
+  .dashboard-grid {
+    gap: 12px;
+  }
+}
+
+/* Scrollbar personalizada para navegadores webkit */
+.dashboard-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dashboard-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.dashboard-container::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+.dashboard-container::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
 }

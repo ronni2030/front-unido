@@ -1,0 +1,66 @@
+.view-content {
+  padding: 16px;
+}
+
+/* Tarjeta */
+.profile-card {
+  max-width: 420px;
+  margin: 0 auto;
+  background: #1c24b0;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Avatar */
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.profile-avatar span {
+  font-size: 72px;
+}
+
+/* Título */
+.profile-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+/* Información */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Fila */
+.profile-row {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiqueta */
+.label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+/* Valor */
+.value {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+}
+
+/* Texto accesibilidad */
+.voice-hint {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
